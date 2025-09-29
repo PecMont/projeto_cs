@@ -30,10 +30,26 @@ export default class ProductsController {
   public async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(createProductValidator)
 
-    const product = await Product.create(payload)
+    // Se o checkbox foi marcado -> cria dois produtos (Direito e Esquerdo)
+    if (payload.createBothSides) {
+      await Product.create({
+        ...payload,
+        side: 'Direito',
+      })
 
+      await Product.create({
+        ...payload,
+        side: 'Esquerdo',
+      })
+
+      return response.redirect().toRoute('products.index')
+    }
+
+    // Caso normal -> cria só um produto com o lado escolhido
+    const product = await Product.create(payload)
     return response.redirect().toRoute('products.show', { id: product.id })
   }
+
 
   public async update({ params, request, response }: HttpContext) {
     const product = await Product.findOrFail(params.id)

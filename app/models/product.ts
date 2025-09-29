@@ -6,13 +6,19 @@ export default class Product extends BaseModel {
   declare id: number
 
   @column()
-  declare name: string
+  declare name: string // Nome da balança
+
+  @column({ columnName: 'car_manufacturer' })
+  declare carManufacturer: string // Fabricante do carro
+
+  @column({ columnName: 'side' })
+  declare side: 'Direito' | 'Esquerdo' | 'Ambos' // Lado da peça (Novo)
 
   @column()
-  declare price: number
+  declare price: number // Valor (Mudança de 'price' para 'value')
 
   @column()
-  declare description: string
+  declare description: string // Descrição
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

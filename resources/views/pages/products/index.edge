@@ -17,6 +17,8 @@
     <thead>
       <tr>
         <th>Nome</th>
+        <th>Fabricante</th>
+        <th>Lado</th>
         <th>Descrição</th>
         <th>Preço</th>
         <th></th>
@@ -26,6 +28,8 @@
       @each(product in products)
         <tr>
           <td>{{ product.name }}</td>
+          <td>{{ product.carManufacturer }}</td>
+          <td>{{ product.side }}</td>
           <td>{{ product.description }}</td>
           <td>{{ product.price }}</td>
           <td>

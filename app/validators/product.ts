@@ -1,3 +1,4 @@
+
 import vine from '@vinejs/vine'
 
 /**
@@ -5,8 +6,14 @@ import vine from '@vinejs/vine'
  */
 export const createProductValidator = vine.compile(
   vine.object({
-    name: vine.string().trim().minLength(3).maxLength(255).trim(),
-    price: vine.number(),
-    description: vine.string().minLength(3).trim(),
+    name: vine.string().trim().minLength(3).maxLength(255), 
+    
+    carManufacturer: vine.string().trim().maxLength(100), 
+    
+    side: vine.enum(['Direito', 'Esquerdo', 'Ambos']),
+    
+    price: vine.number().positive(), 
+    
+    description: vine.string().trim().optional(),
   })
 )

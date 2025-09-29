@@ -1,9 +1,12 @@
 @layout.app({ title: 'oi' })
 
 @slot('main')
+  {{-- Define a URL para Criar (POST) ou Atualizar (PUT) --}}
   @let(url = product ? route('products.update', { id: product.id }, { qs: { _method: 'PUT' } }) : route('products.store'))
 
   @form({ action: url, method: 'POST' })
+    
+    {{-- CAMPO: Nome do Produto --}}
     <div>
       <label for="name">
         Nome do Produto
@@ -12,11 +15,59 @@
       @!input({
         type: 'text',
         name: 'name',
-        placeholder: 'nome ...',
+        placeholder: 'Nome da Balança',
         value: product?.name || ''
       })
     </div>
 
+    {{-- CAMPO NOVO: Fabricante do Carro (carManufacturer) --}}
+    <div>
+      <label for="carManufacturer">
+        Fabricante do Carro
+      </label>
+
+      @!input({
+        type: 'text',
+        name: 'carManufacturer',
+        placeholder: 'Ex: Volkswagen, Fiat, Ford...',
+        value: product?.carManufacturer || ''
+      })
+    </div>
+
+    {{-- CAMPO NOVO: Lado da Peça (side) --}}
+    <div>
+      <label for="side">
+        Lado da Peça
+      </label>
+      
+      <select name="side" id="side">
+        <option value="" disabled selected>Selecione o lado</option>
+        
+        @let(sides = ['Direito', 'Esquerdo', 'Ambos'])
+        
+        @each(side in sides)
+          <option 
+            value="{{ side }}"
+            {{ product?.side === side ? 'selected' : '' }}
+          >
+            {{ side }}
+          </option>
+        @endeach
+      </select>
+    </div>
+
+    {{-- CHECKBOX: Criar sempre Direito + Esquerdo --}}
+    @if(!product)
+      <div>
+        <label>
+          <input type="checkbox" name="createBothSides" value="true">
+          Criar automaticamente para os dois lados (Direito e Esquerdo)
+        </label>
+      </div>
+    @endif
+    
+
+    {{-- CAMPO: Preço --}}
     <div>
       <label for="price">
         Preço
@@ -30,6 +81,7 @@
       })
     </div>
 
+    {{-- CAMPO: Descrição --}}
     <div>
       <label for="description">
         Descrição
@@ -45,6 +97,7 @@
       {{ product ? 'salvar' : 'criar' }}
     </button>
   @end
-@end
 
-@end
+@end 
+
+@end 
