@@ -1,6 +1,12 @@
-@layout.app({ title: 'oi' })
+@layout.app({ title: 'CS Destribuidora' })
 
 @slot('main')
+
+  {{-- Botão de voltar para lista no topo --}}
+  @component('components/link-button', { href: route('products.index') })
+    Voltar para lista
+  @end
+
   {{-- Define a URL para Criar (POST) ou Atualizar (PUT) --}}
   @let(url = product ? route('products.update', { id: product.id }, { qs: { _method: 'PUT' } }) : route('products.store'))
 
