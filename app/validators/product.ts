@@ -10,10 +10,12 @@ export const createProductValidator = vine.compile(
     
     carManufacturer: vine.string().trim().maxLength(100), 
     
-    side: vine.enum(['Direito', 'Esquerdo', 'Ambos']),
+    side: vine.enum(['Direito', 'Esquerdo', 'Ambos']).optional(),
     
     price: vine.number().positive(), 
     
     description: vine.string().trim().optional(),
+
+    createBothSides: vine.boolean().optional(),
   })
 )

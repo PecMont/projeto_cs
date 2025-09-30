@@ -32,13 +32,16 @@ export default class ProductsController {
 
     // Se o checkbox foi marcado -> cria dois produtos (Direito e Esquerdo)
     if (payload.createBothSides) {
+      // ignora o side do payload
+      const { side, createBothSides, ...rest } = payload
+
       await Product.create({
-        ...payload,
+        ...rest,
         side: 'Direito',
       })
 
       await Product.create({
-        ...payload,
+        ...rest,
         side: 'Esquerdo',
       })
 
@@ -46,6 +49,11 @@ export default class ProductsController {
     }
 
     // Caso normal -> cria só um produto com o lado escolhido
+    if (!payload.side) {
+      // segurança extra: se não tiver lado e não for createBothSides -> erro
+      return response.redirect().back()
+    }
+
     const product = await Product.create(payload)
     return response.redirect().toRoute('products.show', { id: product.id })
   }
