@@ -12,13 +12,16 @@ export default class Product extends BaseModel {
   declare carManufacturer: string // Fabricante do carro
 
   @column({ columnName: 'side' })
-  declare side: 'Direito' | 'Esquerdo' | 'Ambos' // Lado da peça (Novo)
+  declare side: 'Direito' | 'Esquerdo' | 'Ambos' // Lado da peça 
 
   @column()
-  declare price: number // Valor (Mudança de 'price' para 'value')
+  declare price: number // Valor 
 
   @column()
   declare description: string // Descrição
+
+  @column({ columnName: 'image_name' })
+  declare imageName: string | null // Mapeia para a coluna 'image_name' no BD
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
