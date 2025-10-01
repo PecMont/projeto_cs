@@ -1,19 +1,14 @@
-@layout.app({ title: 'CS Destribuidora' })
+@layout.app({ title: 'Lista de Produtos' })
 
 @slot('main')
 
-@button({ type: 'submit' })
-  <span>Teste</span>
-@end
-
-<div>
+<div class="container">
   <h1>Lista de Produtos</h1>
   <span>
-    <a href="{{ route('products.create') }}">Criar Produto</a>
+    <a href="{{ route('products.create') }}" class="btn-add">+ Criar Produto</a>
   </span>
-</div>
-<div>
-  <table>
+
+  <table class="styled-table">
     <thead>
       <tr>
         <th>Nome</th>
@@ -21,7 +16,7 @@
         <th>Lado</th>
         <th>Descrição</th>
         <th>Preço</th>
-        <th></th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -31,23 +26,32 @@
           <td>{{ product.carManufacturer }}</td>
           <td>{{ product.side }}</td>
           <td>{{ product.description }}</td>
-          <td>{{ product.price }}</td>
-          <td>
-            <a href="{{ route('products.show', { id: product.id }) }}">ver</a>
+          <td>R$ {{ product.price }}</td>
 
-            <a href="{{ route('products.edit', { id: product.id }) }}">editar</a>
+          <td class="actions">
 
-            @form({ action: route('products.destroy', { id: product.id }, { qs: { _method: 'DELETE' }}) })
-              <button type="submit">
-                deletar
-              </button>
-            @end
-          </td>
+          {{-- Visualizar --}}
+          <a href="{{ route('products.show', { id: product.id }) }}" class="btn-view btn-icon">
+            <i class="fi fi-rr-eye"></i>
+          </a>
+
+          {{-- Editar --}}
+          <a href="{{ route('products.edit', { id: product.id }) }}" class="btn-edit btn-icon">
+            <i class="fi fi-rr-edit"></i>
+          </a>
+
+          {{-- Apagar --}}
+          @form({ action: route('products.destroy', { id: product.id }, { qs: { _method: 'DELETE' }}) })
+            <button type="submit" class="btn-delete btn-icon">
+              <i class="fi fi-rr-trash"></i>
+            </button>
+          @end
+        </td>
         </tr>
       @end
     </tbody>
   </table>
 </div>
-@end
 
+@end
 @end

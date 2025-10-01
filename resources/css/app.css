@@ -1,10 +1,139 @@
-* {
-  margin: 0;
-  padding: 0;
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 10px;
+  font-family: Arial, sans-serif;
 }
 
-html,
-body {
-  height: 100%;
+/* Botão Criar Produto */
+.btn-add {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 15px;
+  background: #215c56;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.btn-add:hover {
+  background: #1a4b45;
+}
+
+/* Tabela */
+.styled-table {
   width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.styled-table thead {
+  background: #f8f9fa;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.styled-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+/* Checkbox alinhado */
+.styled-table th:first-child,
+.styled-table td:first-child {
+  text-align: center;
+  width: 40px;
+}
+
+/* Badges (categorias/status) */
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background: #e6f4ea;
+  color: #1e8e3e;
+}
+
+.badge-warning {
+  background: #fff4e5;
+  color: #e69500;
+}
+
+.badge-danger {
+  background: #fdecea;
+  color: #d93025;
+}
+
+.badge-info {
+  background: #e8f0fe;
+  color: #1967d2;
+}
+
+/* Ações */
+
+.btn-icon {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #5f6368;
+  transition: color 0.2s;
+  
+}
+
+.btn-icon:hover {
+  color: #202124;
+}
+
+.btn-delete:hover {
+  color: #d93025;
+}
+
+/* Visualizar */
+.btn-view {
+  color: #1976d2;
+}
+
+/* Editar */
+.btn-edit {
+  color: #f57c00;
+}
+
+/* Deletar */
+.btn-delete {
+  color: #d32f2f;
+  border: none;
+  cursor: pointer;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;           /* espaço entre os ícones */
+  align-items: center;
+}
+
+.actions a,
+.actions button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border-radius: px;
+  border: none;
+  cursor: pointer;
 }

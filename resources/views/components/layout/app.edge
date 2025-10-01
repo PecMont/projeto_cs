@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.2.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
   <meta charset="utf-8">
   <title>{{ title || "Your default title" }}</title>
+
+  @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
   <nav>
