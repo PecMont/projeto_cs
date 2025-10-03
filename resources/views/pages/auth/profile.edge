@@ -1,0 +1,28 @@
+@layout.app({ title: 'Meu Perfil' })
+
+@slot('main')
+<h2>Meu Perfil</h2>
+
+@if(flashMessages.has('notification'))
+  <p class="success-message">{{ flashMessages.get('notification').message }}</p>
+@endif
+
+<form method="POST" action="{{ route('profile.update') }}">
+  {{ csrfField() }}
+
+  <label>Nome completo</label>
+  <input type="text" name="full_name" value="{{ user.full_name || '' }}">
+
+  <label>Email</label>
+  <input type="email" name="email" value="{{ user.email || '' }}">
+
+  <label>Nova senha</label>
+  <input type="password" name="password" placeholder="Deixe em branco para não alterar">
+
+  <label>Confirmar nova senha</label>
+  <input type="password" name="password_confirmation" placeholder="Deixe em branco para não alterar">
+
+  <button type="submit">Atualizar Perfil</button>
+</form>
+@endslot
+@end

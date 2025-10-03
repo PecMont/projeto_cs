@@ -1,0 +1,86 @@
+{{-- resources/views/pages/auth/register.edge --}}
+@layout.app({ title: 'Criar Nova Conta' })
+
+@slot('main')
+
+  <div class="auth-container">
+    <h2>Criar Nova Conta</h2>
+
+    {{-- 1. Exibição de Erros Globais (opcional, mas útil) --}}
+    @if(flashMessages.has('errors.form'))
+      <div class="alert alert-error">
+        {{ flashMessages.get('errors.form') }}
+      </div>
+    @endif
+
+    {{-- O formulário será enviado (POST) para a rota 'register' --}}
+    @form({ action: route('register'), method: 'POST' })
+      
+      {{-- Nome Completo (Opcional) --}}
+      <div class="form-group">
+        <label for="full_name">Nome Completo</label>
+        @!input({
+          type: 'text',
+          name: 'full_name',
+          placeholder: 'Seu nome completo (Opcional)',
+          value: flashMessages.get('full_name') || ''
+        })
+        @if(flashMessages.has('errors.full_name')) 
+          <p class="error-message">{{ flashMessages.get('errors.full_name') }}</p> 
+        @endif
+      </div>
+
+      {{-- Email (Obrigatório e Único) --}}
+      <div class="form-group">
+        <label for="email">Email</label>
+        @!input({
+          type: 'email',
+          name: 'email',
+          placeholder: 'seu@email.com',
+          value: flashMessages.get('email') || '',
+          required: true
+        })
+        @if(flashMessages.has('errors.email')) 
+          <p class="error-message">{{ flashMessages.get('errors.email') }}</p> 
+        @endif
+      </div>
+
+      {{-- Senha (Obrigatório) --}}
+      <div class="form-group">
+        <label for="password">Senha (mín. 8 caracteres)</label>
+        @!input({
+          type: 'password',
+          name: 'password',
+          placeholder: '••••••••',
+          required: true
+        })
+        @if(flashMessages.has('errors.password')) 
+          <p class="error-message">{{ flashMessages.get('errors.password') }}</p> 
+        @endif
+      </div>
+
+      {{-- Senha de Confirmação (Boas Práticas de Segurança) --}}
+      <div class="form-group">
+        <label for="password_confirmation">Confirmar Senha</label>
+        @!input({
+          type: 'password',
+          name: 'password_confirmation',
+          placeholder: 'Repita a senha',
+          required: true
+        })
+        @if(flashMessages.has('errors.password_confirmation')) 
+          <p class="error-message">{{ flashMessages.get('errors.password_confirmation') }}</p> 
+        @endif
+      </div>
+
+      <button type="submit" class="btn btn-primary">Registrar</button>
+      
+    @end
+
+    <p class="mt-4">
+      Já tem conta? <a href="{{ route('login.show') }}">Faça Login</a>
+    </p>
+  </div>
+
+@endslot
+@end
