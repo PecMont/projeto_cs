@@ -29,6 +29,7 @@ router.post('register', [AuthController, 'register']).as('register')
 // LOGIN 
 router.get('login', [AuthController, 'loginShow']).as('login.show') 
 router.post('login', [AuthController, 'login']).as('login') 
+router.post('logout', [AuthController, 'logout']).as('logout').use(middleware.auth())
 
 router.get('/profile', [ProfileController, 'show']).as('profile.show').use(middleware.auth())
 router.post('/profile', [ProfileController, 'update']).as('profile.update').use(middleware.auth())

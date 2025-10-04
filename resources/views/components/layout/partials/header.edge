@@ -1,6 +1,5 @@
 <header class="site-header">
   <div class="container-header">
-
     <!-- Logo -->
     <div class="logo">
       <img src="/images/LogoVetor.svg" alt="Logo CS Distribuidora">
@@ -20,11 +19,21 @@
         <i class="fi fi-rr-shopping-cart"></i>
       </a>
 
-      <a href="#" class="btn compras">Compras</a>
-      <a href="#" class="btn register">Registrar</a>
-      <a href="#" class="btn login">Login</a>
+      {{-- Visitante não logado --}}
+      @if(!auth.isAuthenticated)
+        <a href="{{ route('register.show') }}" class="btn register">Registrar</a>
+        <a href="{{ route('login.show') }}" class="btn login">Login</a>
+      @else
+        {{-- Usuário logado --}}
+        <a href="{{ route('profile.show') }}" class="user-name">
+          Olá, {{ auth.user.fullName.split(' ')[0] }}
+        </a>
+
+        <form action="{{ route('logout') }}" method="POST" style="display:inline">
+          {{ csrfField() }}
+          <button type="submit" class="btn logout">Logout</button>
+        </form>
+      @endif
     </div>
   </div>
 </header>
-
-
