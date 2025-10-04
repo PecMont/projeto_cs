@@ -77,4 +77,10 @@ export default class ProductsController {
 
     return response.redirect().toRoute('products.index')
   }
+
+
+  public async publicIndex({ view }: HttpContext) {
+    const products = await Product.all()
+    return view.render('pages/home', { products })
+  }
 }

@@ -16,9 +16,13 @@ import ProductsController from '#controllers/products_controller'
 import AuthController from '#controllers/auth_controller'
 import ProfileController from '#controllers/profile_controller'
 
-router.get('/', async () => {
-  return "pedro gato" 
+
+router.get('/', async ({ view }) => {
+  const Product = (await import('#models/product')).default
+  const products = await Product.all()
+  return view.render('pages/home', { products })
 })
+
 
 
 
@@ -43,5 +47,7 @@ return User.all()
 
 
 
-router.resource('/products', ProductsController).as('products').use('*', middleware.auth())
+router.resource('/products', ProductsController).as('products').use('*', [middleware.auth()])
+
+
 
