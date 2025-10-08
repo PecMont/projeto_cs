@@ -1,33 +1,27 @@
-@layout.app({ title: 'CS Destribuidora' })
+@layout.app({ title: 'CS Distribuidora' })
 
-<h1 class="text-2xl font-bold mb-6">Catálogo de Produtos</h1>
+<div class="catalog-container">
 
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-  @each(product in products)
-    <a href="{{ route('products.show', { id: product.id }) }}"
-       class="block border rounded-lg p-4 shadow hover:shadow-lg transition bg-white">
-       
-      <!-- Imagem ou espaço vazio -->
-      <div class="h-40 flex items-center justify-center bg-gray-100 rounded">
-        @if(product.imageName)
-          <img src="/uploads/{{ product.imageName }}"
-               alt="{{ product.name }}"
-               class="max-h-full max-w-full object-contain">
-        @else
-          <span class="text-gray-400">Sem imagem</span>
-        @endif
-      </div>
+  <div class="product-grid">
+    @each(product in products)
+      <a href="{{ route('products.show', { id: product.id }) }}" class="product-card">
+        <div class="product-image-box">
+          @if(product.images && product.images.length > 0)
+            <img 
+              src="/uploads/{{ product.images[0].name }}" 
+              alt="Imagem do produto"
+              class="product-image"
+            >
+          @else
+            <span class="no-image">Sem imagem</span>
+          @endif
+        </div>
 
-      <!-- Nome -->
-      <h2 class="mt-3 font-bold text-lg truncate">{{ product.name }}</h2>
-
-      <!-- Preço -->
-      <p class="text-green-600 font-semibold">R$ {{ product.price }}</p>
-    </a>
-  @endeach
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-price">R$ {{ product.price }}</p>
+      </a>
+    @endeach
+  </div>
 </div>
 
-
-
-@end 
-
+@end

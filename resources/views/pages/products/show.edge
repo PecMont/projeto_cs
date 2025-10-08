@@ -1,25 +1,48 @@
-@layout.app({ title: 'CS Destribuidora' })
+@layout.app({ title: 'CS Distribuidora' })
 
 @slot('main')
-<div></div>
-  <h1>Produto</h1>
-</div>
-<div>
-  <span>
-    {{ product.name }}
-  </span>
-  <span>
-    {{ product.side }}
-  </span>
-  <span>
-    {{ product.carManufacturer }}
-  </span>
-  <span>
-    {{ product.description }}
-  </span>
-  <span>
-     {{ product.price }}
-  </span> 
+<div class="product-page">
+  <!-- Caixa principal -->
+  <div class="product-wrapper">
+
+    <!-- Galeria de imagens -->
+    <div class="product-gallery">
+    @if(product.images && product.images.length > 0)
+      <div class="main-image">
+        <img id="mainProductImage" src="/uploads/{{ product.images[0].name }}" alt="Imagem principal do produto">
+      </div>
+      <div class="thumbs">
+        @each(image in product.images)
+          <img src="/uploads/{{ image.name }}" alt="Imagem do produto" class="thumb">
+        @endeach
+      </div>
+    @else
+      <div class="main-image no-image">
+        <span>Sem imagem disponível</span>
+      </div>
+    @endif
+  </div>
+
+    <!-- Informações principais -->
+    <div class="product-details">
+      <h1 class="product-title">{{ product.name }}</h1>
+      <p class="product-manufacturer"><strong>Fabricante:</strong> {{ product.carManufacturer }}</p>
+      <p class="product-side"><strong>Lado:</strong> {{ product.side }}</p>
+      <p class="product-price">R$ {{ product.price }}</p>
+
+      <div class="product-actions">
+        <button class="btn-buy">Comprar</button>
+        <button class="btn-add-cart">Adicionar ao carrinho</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Descrição abaixo -->
+  <div class="product-description-section">
+    <h2>Descrição</h2>
+    <p>{{ product.description }}</p>
+  </div>
 </div>
 @end
 

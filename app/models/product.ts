@@ -1,5 +1,9 @@
+
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
+import Image from './image.js'
+
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -20,8 +24,10 @@ export default class Product extends BaseModel {
   @column()
   declare description: string // Descrição
 
-  @column({ columnName: 'image_name' })
-  declare imageName: string | null // Mapeia para a coluna 'image_name' no BD
+  @hasMany(() => Image, {
+    foreignKey: 'productId'
+  })
+  declare images: HasMany<typeof Image>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

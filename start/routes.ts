@@ -15,14 +15,15 @@ import { middleware } from '#start/kernel'
 import ProductsController from '#controllers/products_controller'
 import AuthController from '#controllers/auth_controller'
 import ProfileController from '#controllers/profile_controller'
+import ImagesController from '#controllers/images_controller'
+
 
 
 router.get('/', async ({ view }) => {
   const Product = (await import('#models/product')).default
-  const products = await Product.all()
+  const products = await Product.query().preload('images')
   return view.render('pages/home', { products })
 })
-
 
 
 
@@ -35,10 +36,12 @@ router.get('login', [AuthController, 'loginShow']).as('login.show')
 router.post('login', [AuthController, 'login']).as('login') 
 router.post('logout', [AuthController, 'logout']).as('logout').use(middleware.auth())
 
+// PERFIL
 router.get('/profile', [ProfileController, 'show']).as('profile.show').use(middleware.auth())
 router.post('/profile', [ProfileController, 'update']).as('profile.update').use(middleware.auth())
 
-
+// IMAGENS
+router.get('/images/:name', [ImagesController, 'show']).as('images.show')
 
 router.get('/debug/users', async () => {
 const User = (await import('#models/user')).default

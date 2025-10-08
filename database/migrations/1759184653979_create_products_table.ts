@@ -22,9 +22,6 @@ export default class extends BaseSchema {
       // Descrição
       table.text('description').nullable()
 
-      // Nome da imagem
-      table.string('image_name').nullable()
-
       // Colunas de Data/Hora automáticas
       table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
       table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
