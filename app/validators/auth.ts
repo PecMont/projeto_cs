@@ -12,7 +12,7 @@ export const registerValidator = vine.compile(
     // O email deve ser único e formatado corretamente
     email: vine.string().email().unique(async (db, value) => {
       const user = await db.from('users').where('email', value).first()
-      return !user // Retorna true se o email não for encontrado (único)
+      return !user 
     }),
 
     password: vine.string().minLength(8).confirmed(), // Pelo menos 8 caracteres
@@ -23,7 +23,7 @@ export const registerValidator = vine.compile(
 )
 
 /**
- * Validador para o Login (Será usado depois)
+ * Validador para o Login 
  */
 export const loginValidator = vine.compile(
   vine.object({

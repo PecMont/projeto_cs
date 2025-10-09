@@ -62,21 +62,26 @@ export default class ProductsController {
   
     // Se o checkbox foi marcado -> cria dois produtos (Direito e Esquerdo)
     if (payload.createBothSides) {
-      // ignora o side do payload
       const { side, createBothSides, ...rest } = payload
 
       const right = await Product.create({ ...rest, side: 'Direito' })
       const left = await Product.create({ ...rest, side: 'Esquerdo' })
 
-      await saveImages(right.id)
-      await saveImages(left.id)
+      for (const image of images) {
+        if (!image.isValid) {
+          console.error(image.errors)
+          continue
+        }
+
+        const fileName = `${new Date().getTime()}-${image.clientName}`
+        await image.move(app.makePath('public/uploads'), { name: fileName })
+
+        // cria registro para os dois produtos
+        await Image.create({ name: fileName, productId: right.id })
+        await Image.create({ name: fileName, productId: left.id })
+      }
 
       return response.redirect().toRoute('products.index')
-    }
-
-    // Caso normal -> cria só um produto com o lado escolhido
-     if (!payload.side) {
-      return response.redirect().back()
     }
 
     const product = await Product.create(payload)
@@ -133,7 +138,7 @@ export default class ProductsController {
       }
     }
 
-    // Agora apaga o produto (isso também apaga os registros da tabela images)
+    // Agora apaga o produto
     await product.delete()
 
     return response.redirect().toRoute('products.index')
