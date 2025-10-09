@@ -8,7 +8,7 @@
   <div class="create-container">
 
     @component('components/link-button', { href: route('products.index'), class: 'button-back' })
-      Voltar para lista
+      Voltar 
     @end
 
     @let(url = product ? route('products.update', { id: product.id }, { qs: { _method: 'PUT' } }) : route('products.store'))

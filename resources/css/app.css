@@ -506,3 +506,111 @@ html, body {
     font-size: 24px;
   }
 }
+
+
+/* ===========================
+   Estilos do formulário Create
+   =========================== */
+
+.create-container {
+  max-width: 820px;
+  margin: 36px auto;
+  padding: 28px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.06);
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+  box-sizing: border-box;
+}
+
+/* Botões */
+.create-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+/* Botão primário (Criar/Salvar) */
+.create-btn-primary {
+  display: inline-block;
+  padding: 11px 22px;
+  background: #215c56;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.14s ease, transform 0.06s ease;
+  text-decoration: none;
+  text-align: center;
+}
+
+.create-btn-primary:hover {
+  background: #18403b;
+}
+.create-btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Botão secundário (Voltar) */
+.create-btn-secondary {
+  display: inline-block;
+  padding: 11px 22px;
+  background: #f2f3f4;
+  color: #333;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.14s ease, transform 0.06s ease;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.create-btn-secondary:hover {
+  background: #e3e3e3;
+}
+.create-btn-secondary:active {
+  transform: translateY(1px);
+}
+
+/* Campos de formulário */
+.create-container label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.create-container input[type="text"],
+.create-container input[type="number"],
+.create-container input[type="file"],
+.create-container select,
+.create-container textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.16s ease, box-shadow 0.12s ease;
+}
+
+.create-container input:focus,
+.create-container select:focus,
+.create-container textarea:focus {
+  outline: none;
+  border-color: #1f5f57;
+  box-shadow: 0 0 0 4px rgba(33,92,86,0.06);
+}
+
+@media (max-width: 880px) {
+  .create-actions {
+    flex-direction: column;
+  }
+}
