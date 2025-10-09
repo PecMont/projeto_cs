@@ -16,6 +16,7 @@ import ProductsController from '#controllers/products_controller'
 import AuthController from '#controllers/auth_controller'
 import ProfileController from '#controllers/profile_controller'
 import ImagesController from '#controllers/images_controller'
+import { get } from 'http'
 
 
 
@@ -48,9 +49,30 @@ const User = (await import('#models/user')).default
 return User.all()
 })
 
+// PRODUTOS 
+
+router
+  .group(() => {
+    router.get('/products', [ProductsController, 'index']).as('products.index')
+    router.get('/products/create', [ProductsController, 'create']).as('products.create')
+    router.post('/products', [ProductsController, 'store']).as('products.store')
+    router.get('/products/:id/edit', [ProductsController, 'edit']).as('products.edit')
+    router.put('/products/:id', [ProductsController, 'update']).as('products.update')
+    router.delete('/products/:id', [ProductsController, 'destroy']).as('products.destroy')
+  })
+  .use([middleware.auth(), middleware.admin()])
+
+router.get('/products/:id', [ProductsController, 'show']).as('products.show')
 
 
-router.resource('/products', ProductsController).as('products').use('*', [middleware.auth()])
+router.get('/make-admin/:id', async ({ params }) => {
+  const User = (await import('#models/user')).default
+  const user = await User.find(params.id)
 
+  if (!user) return { message: 'Usuário não encontrado' }
 
+  user.isAdmin = true
+  await user.save()
 
+  return { message: `Usuário ${user.fullName} agora é admin!`, user }
+})

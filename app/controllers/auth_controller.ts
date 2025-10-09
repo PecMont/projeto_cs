@@ -47,7 +47,7 @@ export default class AuthController {
       await auth.use('web').login(user)
 
       // Redireciona após login
-      return response.redirect('/products') // ou alguma dashboard
+      return response.redirect('/') 
     } catch (error) {
       session.flash('errors', { login: 'Email ou senha inválidos' })
       return response.redirect().back()
