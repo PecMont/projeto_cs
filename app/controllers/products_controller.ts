@@ -138,7 +138,7 @@ export default class ProductsController {
       }
     }
 
-    // Agora apaga o produto
+    // Apaga o produto
     await product.delete()
 
     return response.redirect().toRoute('products.index')
