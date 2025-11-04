@@ -1,7 +1,5 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-
-
 export default class ProfileController {
   
   
@@ -10,7 +8,6 @@ export default class ProfileController {
     return view.render('pages/auth/profile', { user })
   }
 
-  
   public async update({ request, response, session, auth }: HttpContext) {
     const user = auth.user!
     const { full_name, email, password, password_confirmation } = request.only([

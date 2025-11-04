@@ -4,7 +4,6 @@ html, body {
   padding: 0;
 }
 
-
 /* Header geral */
 .site-header {
   width: 100%;
@@ -107,7 +106,6 @@ html, body {
   background: transparent;
   color: #000;
 }
-
 
 
 /* Container */
@@ -249,9 +247,6 @@ html, body {
   border: none;
   cursor: pointer;
 }
-
-
-
 
 
 /* ====== CATÁLOGO DE PRODUTOS ====== */
@@ -507,10 +502,8 @@ html, body {
   }
 }
 
+/* ====== formulário creat ====== */
 
-/* ===========================
-   Estilos do formulário Create
-   =========================== */
 
 .create-container {
   max-width: 820px;
@@ -614,3 +607,4 @@ html, body {
     flex-direction: column;
   }
 }
+

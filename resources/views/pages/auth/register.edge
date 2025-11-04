@@ -6,7 +6,7 @@
   <div class="auth-container">
     <h2>Criar Nova Conta</h2>
 
-    {{-- 1. Exibição de Erros Globais (opcional, mas útil) --}}
+    {{-- 1. Exibição de Erros Globais  --}}
     @if(flashMessages.has('errors.form'))
       <div class="alert alert-error">
         {{ flashMessages.get('errors.form') }}
@@ -45,7 +45,7 @@
         @endif
       </div>
 
-      {{-- Senha (Obrigatório) --}}
+      {{-- Senha --}}
       <div class="form-group">
         <label for="password">Senha (mín. 8 caracteres)</label>
         @!input({
@@ -59,7 +59,7 @@
         @endif
       </div>
 
-      {{-- Senha de Confirmação (Boas Práticas de Segurança) --}}
+      {{-- Senha de Confirmação --}}
       <div class="form-group">
         <label for="password_confirmation">Confirmar Senha</label>
         @!input({

@@ -44,10 +44,7 @@ router.post('/profile', [ProfileController, 'update']).as('profile.update').use(
 // IMAGENS
 router.get('/images/:name', [ImagesController, 'show']).as('images.show')
 
-router.get('/debug/users', async () => {
-const User = (await import('#models/user')).default
-return User.all()
-})
+
 
 // PRODUTOS 
 
@@ -64,6 +61,10 @@ router
 
 router.get('/products/:id', [ProductsController, 'show']).as('products.show')
 
+router.get('/debug/users', async () => {
+const User = (await import('#models/user')).default
+return User.all()
+})
 
 router.get('/make-admin/:id', async ({ params }) => {
   const User = (await import('#models/user')).default

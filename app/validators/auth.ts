@@ -1,5 +1,3 @@
-// app/validators/auth.ts
-
 import vine from '@vinejs/vine'
 
 /**

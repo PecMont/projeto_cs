@@ -4,7 +4,6 @@ import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import Image from './image.js'
 
-
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
