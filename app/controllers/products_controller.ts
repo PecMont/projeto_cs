@@ -38,7 +38,7 @@ export default class ProductsController {
 
     const images = request.files('images', {
       size: '5mb',
-      extnames: ['jpg', 'jpeg', 'png'],
+      extnames: ['jpg', 'jpeg', 'png', 'webp'],
     })
 
     async function saveImages(productId: number) {
