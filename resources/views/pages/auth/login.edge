@@ -2,27 +2,47 @@
 
 @slot('main')
 
-  <h2>Acessar Conta</h2>
-  
-  {{-- Formulário Mínimo de Teste --}}
-  <form method="POST" action="{{ route('login') }}">
-    {{ csrfField() }}
-    <label for="email">Email</label>
-    <input type="email" name="email" required>
-    
-    <label for="password">Senha</label>
-    <input type="password" name="password" required>
-    
-    <button type="submit">Entrar</button>
-  </form>
+<div class="auth-page">
+  <div class="auth-container">
 
-  @if(flashMessages.has('errors.login'))
-    <p class="error-message">{{ flashMessages.get('errors.login') }}</p>
-  @endif
+    <img src="/images/LogoVetor.svg" class="auth-logo">
 
-  <p>
-    Não tem conta? <a href="{{ route('register.show') }}">Registre-se aqui</a>
-  </p>
+    <h2>Acessar Conta</h2>
+
+    {{-- ERRO DE LOGIN --}}
+    @if(flashMessages.has('errors.login'))
+      <div class="alert-error">
+        {{ flashMessages.get('errors.login') }}
+      </div>
+    @endif
+
+    {{-- FORM LOGIN --}}
+    @form({ action: route('login'), method: 'POST' })
+      
+      @!input({
+        type: 'email',
+        name: 'email',
+        placeholder: 'Email',
+        required: true
+      })
+
+      @!input({
+        type: 'password',
+        name: 'password',
+        placeholder: 'Senha',
+        required: true
+      })
+
+      <a href="#" class="forgot">Esqueceu sua senha?</a>
+
+      <button type="submit" class="btn-primary">Entrar</button>
+
+    @end
+
+    <p>Não tem conta? <a href="{{ route('register.show') }}">Criar uma conta</a></p>
+
+  </div>
+</div>
 
 @endslot
 @end

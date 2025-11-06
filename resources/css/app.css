@@ -14,7 +14,7 @@ html, body {
 
 /* Flex container */
 .container-header {
-  max-width: 1700px;
+  max-width: 1400px;
   margin: 0 auto;         /* centraliza o conteúdo */
   display: flex;
   align-items: center;
@@ -608,3 +608,126 @@ html, body {
   }
 }
 
+/*  LOGIN E REGISTRO  */
+
+/* Fundo da página */
+.auth-page {
+  min-height: calc(100vh - 120px); /* altura total menos o header */
+  background: #1d5a55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+  overflow-x: hidden;       /* evita scroll lateral */
+}
+
+/* Previne scroll lateral global */
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Card */
+.auth-container {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 14px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+/* Logo */
+.auth-logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Título */
+.auth-container h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  font-weight: bold;
+  color: #222;
+}
+
+/* Inputs */
+.auth-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #aaa;
+  background: #f7f7f7;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.auth-container input:focus {
+  outline: none;
+  border-color: #215c56;
+  box-shadow: 0 0 0 2px rgba(33,92,86,0.2);
+}
+
+/* Labels dos formulários de login e registro alinhados à esquerda */
+.auth-container label {
+  display: block;
+  text-align: left;     /* força o alinhamento à esquerda */
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* Botão principal */
+.auth-container .btn-primary {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px;
+  background: #144d48;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.auth-container .btn-primary:hover {
+  background: #0f3c38;
+}
+
+/* Link de recuperação */
+.auth-container .forgot {
+  display: block;
+  font-size: 13px;
+  margin: 6px 0 10px;
+  text-align: left;
+  color: #215c56;
+}
+
+/* Texto abaixo */
+.auth-container p {
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.auth-container p a {
+  color: #215c56;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Erros */
+.alert-error,
+.error-message {
+  background: #fdecea;
+  color: #d93025;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+  text-align: left;
+}
