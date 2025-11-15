@@ -1,0 +1,54 @@
+@layout.app({ title: 'Meu Carrinho' })
+
+<div class="cart-container">
+
+  <h1>Meu Carrinho</h1>
+
+  @if(items.length === 0)
+    <p>Seu carrinho está vazio.</p>
+  @else
+
+    <table class="styled-table">
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Lado</th>
+          <th>Qtd</th>
+          <th>Preço</th>
+          <th>Total</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @each(item in items)
+          <tr>
+            <td>{{ item.product.name }}</td>\
+            <td>{{ item.product.side }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>R$ {{ item.price }}</td>
+            <td>R$ {{ item.quantity * item.price }}</td>
+
+            <td>
+              @form({ action: route('cart.remove', { itemId: item.id }, { qs: { _method: 'DELETE' } }) })
+                <button type="submit" class="btn-delete btn-icon">
+                  <i class="fi fi-rr-trash"></i>
+                </button>
+              @end
+            </td>
+          </tr>
+        @endeach
+      </tbody>
+    </table>
+
+    <h2>Total: R$ {{ total }}</h2>
+
+    @form({ action: route('cart.clear'), method: 'POST' })
+      <button class="btn-clear">Esvaziar Carrinho</button>
+    @end
+
+  @endif
+
+</div>
+
+@end

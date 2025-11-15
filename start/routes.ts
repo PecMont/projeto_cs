@@ -16,6 +16,7 @@ import ProductsController from '#controllers/products_controller'
 import AuthController from '#controllers/auth_controller'
 import ProfileController from '#controllers/profile_controller'
 import ImagesController from '#controllers/images_controller'
+import CartController from '#controllers/carts_controller'
 import { get } from 'http'
 
 
@@ -77,3 +78,15 @@ router.get('/make-admin/:id', async ({ params }) => {
 
   return { message: `Usuário ${user.fullName} agora é admin!`, user }
 })
+
+
+// Carrinho de compras
+
+router
+  .group(() => {
+    router.get('/cart', [CartController, 'index']).as('cart.index')
+    router.post('/cart/add/:id', [CartController, 'add']).as('cart.add')
+    router.delete('/cart/remove/:itemId', [CartController, 'remove']).as('cart.remove')
+    router.post('/cart/clear', [CartController, 'clear']).as('cart.clear')
+  })
+  .use([middleware.auth()])
