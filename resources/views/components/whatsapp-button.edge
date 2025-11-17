@@ -1,0 +1,72 @@
+<a 
+  href="https://wa.me/5521964095718?text=Olá,%20estou%20interessado%20em%20uma%20peça%20que%20vi%20no%20site"
+  class="whatsapp-button" 
+  target="_blank"
+>
+  <img src="/images/whatsapp.svg" alt="WhatsApp" class="whatsapp-icon">
+
+  <span class="whatsapp-tooltip">Fale com a gente</span>
+</a>
+
+<style>
+.whatsapp-button {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background-color: #25D366;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  box-shadow: 0px 0px 12px rgba(0,0,0,0.25);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+}
+
+/* Ícone */
+.whatsapp-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Tooltip */
+.whatsapp-tooltip {
+  position: absolute;
+  right: 70px; /* posição ao lado da bolinha */
+  background: #333;
+  color: #fff;
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(5px);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+/* Triângulo da “flecha” do tooltip */
+.whatsapp-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -6px;
+  transform: translateY(-50%);
+  border-left: 6px solid #333;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* Mostrar tooltip no hover */
+.whatsapp-button:hover .whatsapp-tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
