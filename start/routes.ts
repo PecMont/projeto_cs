@@ -17,7 +17,13 @@ import AuthController from '#controllers/auth_controller'
 import ProfileController from '#controllers/profile_controller'
 import ImagesController from '#controllers/images_controller'
 import CartController from '#controllers/carts_controller'
+import SocialController from '#controllers/social_controller'
 import { get } from 'http'
+
+
+// Google Auth
+router.get('/auth/google/redirect', [SocialController, 'redirect']).as('google.redirect')
+router.get('/auth/google/callback', [SocialController, 'callback']).as('google.callback')
 
 
 
