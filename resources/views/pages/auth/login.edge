@@ -39,7 +39,9 @@
 
     @end
 
-    <a href="{{ route('google.redirect') }}">Login com Google</a>
+    @component('components/google-button')
+    @end
+
 
     <p>Não tem conta? <a href="{{ route('register.show') }}">Criar uma conta</a></p>
 
