@@ -21,18 +21,16 @@ import SocialController from '#controllers/social_controller'
 import { get } from 'http'
 
 
-// Google Auth
+// GOOLGE AUTH
 router.get('/auth/google/redirect', [SocialController, 'redirect']).as('google.redirect')
 router.get('/auth/google/callback', [SocialController, 'callback']).as('google.callback')
 
-
-
+// HOME
 router.get('/', async ({ view }) => {
   const Product = (await import('#models/product')).default
   const products = await Product.query().preload('images')
   return view.render('pages/home', { products })
 })
-
 
 
 // REGISTRO 
@@ -86,7 +84,7 @@ router.get('/make-admin/:id', async ({ params }) => {
 })
 
 
-// Carrinho de compras
+// CARRINHO
 
 router
   .group(() => {

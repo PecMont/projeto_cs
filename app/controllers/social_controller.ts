@@ -45,11 +45,29 @@ export default class SocialController {
       }),
     })
 
-    const tokenData = await tokenResponse.json()
+    type TokenData = {
+      access_token: string
+      refresh_token?: string
+      expires_in?: number
+      token_type?: string
+      scope?: string
+      id_token?: string
+    }
+
+    const tokenData = (await tokenResponse.json()) as TokenData
+
+    if (!tokenData || !tokenData.access_token) {
+      // Failed to obtain access token from Google
+      return response.redirect('/')
+    }
 
     const googleUserResponse = await fetch(
       `https://www.googleapis.com/oauth2/v2/userinfo?access_token=${tokenData.access_token}`
     )
+
+    if (!googleUserResponse.ok) {
+      return response.redirect('/')
+    }
 
     const googleUser = (await googleUserResponse.json()) as GoogleUser
 

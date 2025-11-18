@@ -49,6 +49,8 @@ export default class AuthController {
       return response.redirect().back()
     }
 
+    
+
   }
 
   // GET: Logout
