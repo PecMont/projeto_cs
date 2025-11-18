@@ -18,7 +18,7 @@ import ProfileController from '#controllers/profile_controller'
 import ImagesController from '#controllers/images_controller'
 import CartController from '#controllers/carts_controller'
 import SocialController from '#controllers/social_controller'
-import { get } from 'http'
+import PasswordResetsController from '#controllers/password_resets_controller'
 
 
 // GOOLGE AUTH
@@ -52,9 +52,7 @@ router.get('/images/:name', [ImagesController, 'show']).as('images.show')
 
 
 // PRODUTOS 
-
-router
-  .group(() => {
+router.group(() => {
     router.get('/products', [ProductsController, 'index']).as('products.index')
     router.get('/products/create', [ProductsController, 'create']).as('products.create')
     router.post('/products', [ProductsController, 'store']).as('products.store')
@@ -83,14 +81,17 @@ router.get('/make-admin/:id', async ({ params }) => {
   return { message: `Usuário ${user.fullName} agora é admin!`, user }
 })
 
-
 // CARRINHO
-
-router
-  .group(() => {
+router.group(() => {
     router.get('/cart', [CartController, 'index']).as('cart.index')
     router.post('/cart/add/:id', [CartController, 'add']).as('cart.add')
     router.delete('/cart/remove/:itemId', [CartController, 'remove']).as('cart.remove')
     router.post('/cart/clear', [CartController, 'clear']).as('cart.clear')
   })
   .use([middleware.auth()])
+
+// REDEFINIÇÃO DE SENHA
+router.get('/forgot-password', [PasswordResetsController, 'requestForm']).as('password.request')
+router.post('/forgot-password', [PasswordResetsController, 'sendEmail']).as('password.email')
+router.get('/reset-password/:token', [PasswordResetsController, 'resetForm']).as('password.reset')
+router.post('/reset-password/:token', [PasswordResetsController, 'resetPassword']).as('password.update')
