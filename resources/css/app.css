@@ -29,7 +29,7 @@ html, body {
 
 /* Search */
 .search-bar {
-  flex: 1;
+  width: 75%;               
   display: flex;
   align-items: center;
   background: #e5e5e5;
@@ -37,23 +37,33 @@ html, body {
   overflow: hidden;
 }
 
-.search-bar input {
+
+.search-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+
+.search-form input {
   flex: 1;
-  padding: 12px 10px;
+  padding: 12px 16px;
   border: none;
   background: transparent;
 }
 
-.search-bar input:focus {
+.search-form input:focus {
   outline: none;
 }
 
-.search-bar button {
+/* Ícone do botão */
+.search-form button {
   border: none;
   background: none;
-  padding: 8px 12px;
+  padding: 10px 18px;
   cursor: pointer;
   color: #555;
+  font-size: 16px;
 }
 
 /* Ações do header */

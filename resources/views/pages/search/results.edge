@@ -1,0 +1,34 @@
+@layout.app({ title: `Resultados para "${query}"` })
+
+@slot('main')
+  <div class="container">
+    <h1>Resultados para: "{{ query }}"</h1>
+
+    @if(products.length === 0)
+      <p>Nenhum produto encontrado.</p>
+      <p>Tente palavras-chave diferentes ou verifique a ortografia.</p>
+    @else
+      <div class="product-grid">
+        @each(product in products)
+          <a href="{{ route('products.show', { id: product.id }) }}" class="product-card">
+            <div class="product-image-box">
+              @if(product.images && product.images.length > 0)
+                <img src="/uploads/{{ product.images[0].name }}" alt="{{ product.name }}" class="product-image">
+              @else
+                <span class="no-image">Sem imagem</span>
+              @endif
+            </div>
+
+            <div class="product-info">
+              <h3>{{ product.name }}</h3>
+              <p class="manufacturer">{{ product.carManufacturer }}</p>
+              <p class="side">{{ product.side }}</p>
+              <p class="price">R$ {{ product.price }}</p>
+            </div>
+          </a>
+        @endeach
+      </div>
+    @endif
+  </div>
+@endslot
+@end

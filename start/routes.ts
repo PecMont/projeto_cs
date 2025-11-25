@@ -19,6 +19,7 @@ import ImagesController from '#controllers/images_controller'
 import CartController from '#controllers/carts_controller'
 import SocialController from '#controllers/social_controller'
 import PasswordResetsController from '#controllers/password_resets_controller'
+import SearchController from '#controllers/search_controller'
 
 
 // GOOLGE AUTH
@@ -95,3 +96,7 @@ router.get('/forgot-password', [PasswordResetsController, 'requestForm']).as('pa
 router.post('/forgot-password', [PasswordResetsController, 'sendEmail']).as('password.email')
 router.get('/reset-password/:token', [PasswordResetsController, 'resetForm']).as('password.reset')
 router.post('/reset-password/:token', [PasswordResetsController, 'resetPassword']).as('password.update')
+
+
+// PESQUISA
+router.get('/search', [SearchController, 'index']).as('search')
