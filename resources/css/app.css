@@ -429,6 +429,12 @@ html, body {
   margin: 15px 0;
 }
 
+.product-actions {
+  display: flex;
+  align-items: center; /* alinha verticalmente */
+  gap: 10px;           /* espaço entre os botões */
+}
+
 /* Botão */
 .btn-buy {
   padding: 12px 25px;
