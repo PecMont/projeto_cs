@@ -7,21 +7,21 @@
 
     <!-- Galeria de imagens -->
     <div class="product-gallery">
-    @if(product.images && product.images.length > 0)
-      <div class="main-image">
-        <img id="mainProductImage" src="/uploads/{{ product.images[0].name }}" alt="Imagem principal do produto">
-      </div>
-      <div class="thumbs">
-        @each(image in product.images)
-          <img src="/uploads/{{ image.name }}" alt="Imagem do produto" class="thumb">
-        @endeach
-      </div>
-    @else
-      <div class="main-image no-image">
-        <span>Sem imagem disponível</span>
-      </div>
-    @endif
-  </div>
+      @if(product.images && product.images.length > 0)
+        <div class="main-image">
+          <img id="mainProductImage" src="/uploads/{{ product.images[0].name }}" alt="Imagem principal do produto">
+        </div>
+        <div class="thumbs">
+          @each(image in product.images)
+            <img src="/uploads/{{ image.name }}" alt="Imagem do produto" class="thumb">
+          @endeach
+        </div>
+      @else
+        <div class="main-image no-image">
+          <span>Sem imagem disponível</span>
+        </div>
+      @endif
+    </div>
 
     <!-- Informações principais -->
     <div class="product-details">
@@ -31,7 +31,9 @@
       <p class="product-price">R$ {{ product.price }}</p>
 
       <div class="product-actions">
-        <button class="btn-buy">Comprar</button>
+        <!-- BOTÃO COMPRAR -->
+        <button class="btn-buy" id="buyButton" data-id="{{ product.id }}">Comprar</button>
+
         <form action="{{ route('cart.add', { id: product.id }) }}" method="POST">
           {{ csrfField() }}
           <button class="btn-add-cart">Adicionar ao carrinho</button>
@@ -51,6 +53,35 @@
   @endcomponent
 
 </div>
-@end
 
+<script>
+  document.getElementById('buyButton').addEventListener('click', async (e) => {
+    const productId = e.target.dataset.id;
+    console.log("Iniciando checkout para:", productId);
+
+    try {
+      const res = await fetch(`/checkout/create/${productId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const json = await res.json();
+      console.log("Resposta recebida do servidor:", res.status, json);
+
+      if (!res.ok) {
+        console.error("Erro do servidor:", json);
+        return alert("Erro ao criar checkout");
+      }
+
+      window.location.href = json.checkoutUrl;
+
+    } catch (err) {
+      console.error("Erro no fetch:", err);
+    }
+  });
+</script>
+
+@end
 @end

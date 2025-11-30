@@ -20,7 +20,7 @@ import CartController from '#controllers/carts_controller'
 import SocialController from '#controllers/social_controller'
 import PasswordResetsController from '#controllers/password_resets_controller'
 import SearchController from '#controllers/search_controller'
-
+import CheckoutController from '#controllers/checkout_controller'
 
 // GOOLGE AUTH
 router.get('/auth/google/redirect', [SocialController, 'redirect']).as('google.redirect')
@@ -100,3 +100,22 @@ router.post('/reset-password/:token', [PasswordResetsController, 'resetPassword'
 
 // PESQUISA
 router.get('/search', [SearchController, 'index']).as('search')
+
+
+// CHECKOUT
+
+router.post('/checkout/create/:id', [CheckoutController, 'createSession']).as('checkout.create')
+
+router.get('/success', async ({ view }) => {
+  return view.render('pages/checkout/success')
+}).as('checkout.success')
+
+router.get('/checkout/cancel', async ({ request, response }) => {
+  const productId = request.qs().product_id
+
+  if (!productId) {
+    return response.redirect('/') // fallback caso venha sem ID
+  }
+
+  return response.redirect(`/products/${productId}`)
+}).as('checkout.cancel')

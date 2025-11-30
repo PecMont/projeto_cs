@@ -1,0 +1,48 @@
+@layout.app({ title: 'Pagamento Concluído' })
+
+@slot('main')
+<div class="success-wrapper" style="
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+">
+
+  <img 
+    style="width: 90px; margin-bottom: 20px;" 
+    src="https://cdn-icons-png.flaticon.com/512/845/845646.png"
+    alt="Sucesso"
+  />
+
+  <h1 style="font-size: 28px; margin-bottom: 10px; color: #2d8a40;">
+    Pagamento realizado com sucesso! 
+  </h1>
+
+  <p style="font-size: 18px; margin-bottom: 30px; color: #555;">
+    Seu pedido foi aprovado e está sendo processado.
+  </p>
+
+  <a 
+    href="/" 
+    style="
+      display: inline-block;
+      padding: 12px 22px;
+      font-size: 18px;
+      background: #2d8a40;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.2s;
+    "
+    onmouseover="this.style.background='#256b33'"
+    onmouseout="this.style.background='#2d8a40'"
+  >
+    Voltar para a loja
+  </a>
+
+</div>
+@end
+@end

@@ -67,7 +67,8 @@
     "better-sqlite3": "^12.4.1",
     "edge.js": "^6.2.1",
     "luxon": "^3.7.2",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "stripe": "^20.0.0"
   },
   "hotHook": {
     "boundaries": [
