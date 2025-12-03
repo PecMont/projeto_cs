@@ -1,0 +1,48 @@
+@layout.app({ title: 'Minhas Compras' })
+
+@slot('main')
+
+<div class="container">
+  <h1>Minhas Compras</h1>
+
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th>Peça</th>
+        <th>Lado</th>
+        <th>Quantidade</th>
+        <th>Valor Total</th>
+        <th>Data da Compra</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @if(orders.length === 0)
+        <tr>
+          <td colspan="5" style="text-align:center; padding: 20px;">
+            Você ainda não fez nenhuma compra.
+          </td>
+        </tr>
+      @else
+        @each(order in orders)
+          <tr>
+            <td>{{ order.productName }}</td>
+            <td>{{ order.productSide }}</td>
+            <td>{{ order.quantity }}</td>
+            <td>R$ {{ order.amount }}</td>
+            <td>
+              {{
+                order.createdAt
+                  ? new Date(order.createdAt).toLocaleString('pt-BR')
+                  : '—'
+              }}
+            </td>
+          </tr>
+        @end
+      @endif
+    </tbody>
+  </table>
+</div>
+
+@end
+@end

@@ -21,6 +21,9 @@ import SocialController from '#controllers/social_controller'
 import PasswordResetsController from '#controllers/password_resets_controller'
 import SearchController from '#controllers/search_controller'
 import CheckoutController from '#controllers/checkout_controller'
+import OrdersController from '#controllers/orders_controller'
+
+
 
 
 // GOOLGE AUTH
@@ -47,6 +50,7 @@ router.post('logout', [AuthController, 'logout']).as('logout').use(middleware.au
 // PERFIL
 router.get('/profile', [ProfileController, 'show']).as('profile.show').use(middleware.auth())
 router.post('/profile', [ProfileController, 'update']).as('profile.update').use(middleware.auth())
+router.get('/orders', [OrdersController, 'index']).as('orders.index').use(middleware.auth())
 
 // IMAGENS
 router.get('/images/:name', [ImagesController, 'show']).as('images.show')
@@ -124,3 +128,5 @@ router.get('/checkout/cancel', async ({ request, response }) => {
 }).as('checkout.cancel')
 
 router.post('/checkout/cart', [CheckoutController, 'checkoutCart']).as('checkout.cart')
+
+

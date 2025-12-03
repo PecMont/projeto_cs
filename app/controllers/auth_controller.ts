@@ -48,9 +48,6 @@ export default class AuthController {
       session.flash('errors', { login: 'Email ou senha inválidos' })
       return response.redirect().back()
     }
-
-    
-
   }
 
   // GET: Logout
