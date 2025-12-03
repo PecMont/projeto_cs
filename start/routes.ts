@@ -22,6 +22,7 @@ import PasswordResetsController from '#controllers/password_resets_controller'
 import SearchController from '#controllers/search_controller'
 import CheckoutController from '#controllers/checkout_controller'
 
+
 // GOOLGE AUTH
 router.get('/auth/google/redirect', [SocialController, 'redirect']).as('google.redirect')
 router.get('/auth/google/callback', [SocialController, 'callback']).as('google.callback')
@@ -106,16 +107,20 @@ router.get('/search', [SearchController, 'index']).as('search')
 
 router.post('/checkout/create/:id', [CheckoutController, 'createSession']).as('checkout.create')
 
-router.get('/success', async ({ view }) => {
-  return view.render('pages/checkout/success')
-}).as('checkout.success')
+router.get('/success', [CheckoutController, 'success']).as('checkout.success')
 
 router.get('/checkout/cancel', async ({ request, response }) => {
+  const from = request.qs().from
   const productId = request.qs().product_id
 
-  if (!productId) {
-    return response.redirect('/') // fallback caso venha sem ID
+  if (from === 'cart') {
+    return response.redirect('/cart')
   }
-
-  return response.redirect(`/products/${productId}`)
+  if (productId) {
+    return response.redirect(`/products/${productId}`)
+  }
+  
+  return response.redirect('/')
 }).as('checkout.cancel')
+
+router.post('/checkout/cart', [CheckoutController, 'checkoutCart']).as('checkout.cart')
