@@ -35,9 +35,26 @@
         <a href="{{ route('login.show') }}" class="btn login">Login</a>
       @else
         {{-- Usuário logado --}}
-        <a href="{{ route('profile.show') }}" class="user-name">
-          Olá, {{ auth.user.fullName.split(' ')[0] }}
-        </a>
+        <div class="user-menu">
+          <span class="user-name">
+            Olá, {{ auth.user.fullName.split(' ')[0] }}
+            <i class="fi fi-rr-angle-small-down"></i>
+          </span>
+
+          <div class="user-dropdown">
+
+            <a href="{{ route('profile.show') }}">Meu Perfil</a>
+            <a href="{{ route('orders.index') }}">Minhas Compras</a>
+
+            {{-- Se for admin, mostrar botões extras DENTRO do dropdown --}}
+            @if(auth.user?.isAdmin)
+              <hr class="dropdown-divider">
+              <a href="{{ route('products.index') }}">Produtos</a>
+              <a href="#">Vendas</a>
+            @endif
+
+          </div>
+        </div>
 
         <form action="{{ route('logout') }}" method="POST" style="display:inline">
           {{ csrfField() }}

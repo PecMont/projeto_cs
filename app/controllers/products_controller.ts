@@ -101,7 +101,7 @@ export default class ProductsController {
     // Pega novas imagens (se o usuário enviou)
     const images = request.files('images', {
       size: '5mb',
-      extnames: ['jpg', 'jpeg', 'png'],
+      extnames: ['jpg', 'jpeg', 'png', 'webp'],
     })
 
     for (const image of images) {
