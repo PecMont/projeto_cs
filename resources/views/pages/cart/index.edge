@@ -1,7 +1,5 @@
 @layout.app({ title: 'Meu Carrinho' })
-
 <div class="cart-container">
-
   <h1>Meu Carrinho</h1>
   @if(items.length === 0)
     <p>Seu carrinho está vazio.</p>
@@ -15,14 +13,14 @@
           <th>Qtd</th>
           <th>Preço</th>
           <th>Total</th>
-          <th>Ações</th>
+          <th></th>
         </tr>
       </thead>
 
       <tbody>
         @each(item in items)
           <tr>
-            <td>{{ item.product.name }}</td>\
+            <td>{{ item.product.name }}</td>
             <td>{{ item.product.side }}</td>
             <td>{{ item.quantity }}</td>
             <td>R$ {{ item.price }}</td>

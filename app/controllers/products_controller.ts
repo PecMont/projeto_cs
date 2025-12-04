@@ -5,6 +5,8 @@ import app from '@adonisjs/core/services/app'
 import Image from '#models/image'
 import fs from 'node:fs'
 import path from 'node:path'
+import { GoogleGenerativeAI } from '@google/generative-ai'
+import env from '#start/env'
 
 
 export default class ProductsController {
@@ -147,5 +149,50 @@ export default class ProductsController {
     const products = await Product.query().preload('images')
 
     return view.render('pages/home', { products })
+  }
+
+
+  public async enhanceDescription({ request, response }: HttpContext) {
+    const { text, productName, carManufacturer } = request.body()
+
+    // Validação básica
+    if (!text && !productName) {
+      return response.badRequest({ error: 'Texto ou nome do produto necessário' })
+    }
+
+    try {
+      // Inicializa o Gemini
+      const genAI = new GoogleGenerativeAI(env.get('GEMINI_API_KEY', ''))
+      
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" })
+
+      const prompt = `
+        Você é um especialista em peças automotivas e SEO para e-commerce.
+        Sua tarefa é criar ou melhorar a descrição de um produto.
+        
+        Produto: ${productName}
+        Fabricante do Carro: ${carManufacturer}
+        Descrição atual (pode estar vazia): "${text}"
+        
+        Regras:
+        1. Escreva um texto comercial e persuasivo em Português do Brasil.
+        2. Se a descrição atual for curta, expanda com detalhes técnicos prováveis.
+        3. Use tópicos para listar benefícios se achar necessário. 
+        4. Retorne APENAS o texto da descrição, sem aspas ou introduções do tipo "Aqui está a descrição:
+        5. Não utilize * no texto.
+      `
+
+      const result = await model.generateContent(prompt)
+      const responseText = result.response.text()
+
+      return response.json({ text: responseText })
+
+    } catch (error) {
+      console.error('Erro na IA:', error)
+      // Retorna erro 
+      return response.status(500).json({ 
+        error: 'Não foi possível gerar o texto no momento. Tente novamente mais tarde.' 
+      })
+    }
   }
 }

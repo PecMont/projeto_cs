@@ -509,6 +509,7 @@ html, body {
   font-size: 16px;
   color: #333;
   line-height: 1.6;
+  white-space: pre-line;
 }
 
 /* Responsivo */
@@ -809,4 +810,237 @@ html, body {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* Descrição do produto IA */
+.ai-actions-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 8px; /* Espaço entre o textarea e o botão */
+}
+
+/* O botão do ícone */
+.btn-ai-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  position: relative; /* Necessário para posicionar o texto flutuante */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+  border-radius: 50%;
+}
+
+.btn-ai-icon:hover {
+  background-color: #f0f0f0; /* Fundo leve ao passar o mouse */
+  transform: scale(1.1); /* Leve aumento do ícone */
+}
+
+.btn-ai-icon img {
+  width: 28px; /* Tamanho do ícone */
+  height: 28px;
+}
+
+/* O Texto do Tooltip (Escondido por padrão) */
+.btn-ai-icon .tooltip-text {
+  visibility: hidden;
+  width: 220px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  font-size: 13px;
+  
+  /* Posicionamento */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%; /* Faz aparecer EM CIMA do botão */
+  left: 50%;
+  margin-left: -110px; /* Centraliza horizontalmente (metade do width) */
+  
+  /* Efeito de transição */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* A setinha preta embaixo do tooltip (opcional, mas fica bonito) */
+.btn-ai-icon .tooltip-text::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+/* Mostrar o texto quando passar o mouse */
+.btn-ai-icon:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Texto de carregando */
+#ai-loading {
+  font-size: 0.9rem;
+  color: #666;
+  font-style: italic;
+}
+
+/* Carinho */
+
+.cart-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  font-family: "Inter", Arial, sans-serif;
+}
+
+/* Título Principal */
+.cart-container h1 {
+  font-size: 28px;
+  color: #215c56;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 15px;
+}
+
+/* Mensagem de vazio */
+.cart-container p {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* Ajustes específicos na tabela para o carrinho */
+.cart-container .styled-table th {
+  background-color: #215c56; /* Cabeçalho verde para destacar */
+  color: #fff;
+}
+
+.cart-container .styled-table td {
+  vertical-align: middle;
+}
+
+/* Centralizar a coluna de ações e quantidade */
+.cart-container .styled-table th:nth-child(3),
+.cart-container .styled-table td:nth-child(3),
+.cart-container .styled-table th:nth-child(6),
+.cart-container .styled-table td:nth-child(6) {
+  text-align: center;
+}
+
+/* Preço e Total em negrito */
+.cart-container .styled-table td:nth-child(4),
+.cart-container .styled-table td:nth-child(5) {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Botão de Lixeira (Delete) */
+.btn-delete {
+  background: #ffeeed;
+  color: #d93025;
+  border-radius: 8px;
+  padding: 8px 12px;
+  transition: all 0.2s;
+}
+
+.btn-delete:hover {
+  background: #fdecea;
+  color: #b71c1c;
+  transform: scale(1.05);
+}
+
+/* ====== ÁREA DE TOTAL E BOTÕES ====== */
+
+/* Total */
+.cart-container h2 {
+  text-align: right;
+  font-size: 24px;
+  color: #222;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+/* Wrapper para os botões ficarem alinhados à direita */
+.cart-container form {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+/* Botão Finalizar Compra (Herdando estilo base e melhorando) */
+.cart-container .btn-primary {
+  padding: 14px 30px;
+  font-size: 18px;
+  background-color: #215c56;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(33, 92, 86, 0.2);
+}
+
+.cart-container .btn-primary:hover {
+  background-color: #1a4b45;
+  transform: translateY(-2px);
+}
+
+/* Botão Esvaziar Carrinho */
+.btn-clear {
+  background: transparent;
+  color: #d93025; /* Vermelho */
+  border: 1px solid #d93025;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.btn-clear:hover {
+  background: #fff5f5;
+  border-color: #b71c1c;
+  color: #b71c1c;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 15px;
+    margin: 20px 10px;
+  }
+  
+  .cart-container .styled-table {
+    display: block;
+    overflow-x: auto; /* Permite rolar a tabela lateralmente no celular */
+    white-space: nowrap;
+  }
+
+  .cart-container .btn-primary, 
+  .cart-container .btn-clear {
+    width: 100%; /* Botões ocupam toda a largura no celular */
+  }
+  
+  .cart-container form {
+    display: block;
+  }
+  
+  .cart-container h2 {
+    text-align: center;
+  }
 }

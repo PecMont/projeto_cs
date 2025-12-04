@@ -10,9 +10,8 @@ export default class ImportProducts extends BaseCommand {
   public static options = {
     startApp: true
   }
-  /**
-   * Detecta se o produto é Lado Direito, Esquerdo ou Ambos
-   */
+  //Detecta se o produto é Lado Direito, Esquerdo ou Ambos
+   
   private detectSide(name: string): 'Direito' | 'Esquerdo' | 'Ambos' {
   const text = name.toLowerCase()
 
@@ -53,7 +52,7 @@ export default class ImportProducts extends BaseCommand {
       const name = nameRaw.trim()
       const side = this.detectSide(name)
 
-      // Forma correta de criar registro no Lucid
+      
       await Product.create({
       name: name,
       carManufacturer: 'Não definido',

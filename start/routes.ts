@@ -26,6 +26,7 @@ import OrdersController from '#controllers/orders_controller'
 
 
 
+
 // GOOLGE AUTH
 router.get('/auth/google/redirect', [SocialController, 'redirect']).as('google.redirect')
 router.get('/auth/google/callback', [SocialController, 'callback']).as('google.callback')
@@ -129,4 +130,5 @@ router.get('/checkout/cancel', async ({ request, response }) => {
 
 router.post('/checkout/cart', [CheckoutController, 'checkoutCart']).as('checkout.cart')
 
-
+// Rota para a IA Descrição
+router.post('/api/enhance-description', [ProductsController, 'enhanceDescription'])
