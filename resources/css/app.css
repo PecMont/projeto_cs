@@ -1044,3 +1044,104 @@ html, body {
     text-align: center;
   }
 }
+
+
+/* PÁGINA DE PERFIL */
+
+.profile-container {
+  max-width: 600px; /* Um pouco mais estreito que o formulário de produtos */
+  margin: 40px auto;
+  padding: 35px 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  font-family: "Inter", "Segoe UI", Roboto, Arial, sans-serif;
+  color: #222;
+}
+
+/* Título */
+.profile-container h2 {
+  font-size: 26px;
+  color: #215c56; /* Verde da marca */
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+  font-weight: bold;
+}
+
+/* Estrutura do formulário */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Espaço entre cada campo */
+}
+
+/* Labels */
+.profile-container label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Inputs */
+.profile-container input[type="text"],
+.profile-container input[type="email"],
+.profile-container input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-container input:focus {
+  outline: none;
+  border-color: #215c56;
+  box-shadow: 0 0 0 4px rgba(33, 92, 86, 0.1);
+}
+
+/* Placeholder */
+.profile-container input::placeholder {
+  color: #999;
+  font-size: 14px;
+}
+
+/* Botão de Salvar */
+.btn-save-profile {
+  margin-top: 10px;
+  width: 100%;
+  padding: 14px;
+  background-color: #215c56;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-save-profile:hover {
+  background-color: #1a4b45;
+}
+
+.btn-save-profile:active {
+  transform: translateY(1px);
+}
+
+/* Mensagem de Sucesso (Flash Message) */
+.alert-success {
+  background-color: #e6f4ea;
+  color: #1e8e3e;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #cce8d5;
+  font-weight: 500;
+  text-align: center;
+}
