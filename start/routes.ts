@@ -76,18 +76,6 @@ const User = (await import('#models/user')).default
 return User.all()
 })
 
-router.get('/make-admin/:id', async ({ params }) => {
-  const User = (await import('#models/user')).default
-  const user = await User.find(params.id)
-
-  if (!user) return { message: 'Usuário não encontrado' }
-
-  user.isAdmin = true
-  await user.save()
-
-  return { message: `Usuário ${user.fullName} agora é admin!`, user }
-})
-
 // CARRINHO
 router.group(() => {
     router.get('/cart', [CartController, 'index']).as('cart.index')
