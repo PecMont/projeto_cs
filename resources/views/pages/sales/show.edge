@@ -1,0 +1,160 @@
+@layout.app({ title: 'Detalhes da Venda #' + sale.id })
+
+@slot('styles')
+  <link rel="stylesheet" href="/css/create.css">
+  <style>
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .info-box {
+      background-color: #f8f9fa;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #215c56;
+      font-size: 18px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-bottom: 15px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 15px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .info-value {
+      color: #222;
+      font-weight: 500;
+    }
+
+    .total-highlight {
+      font-size: 20px;
+      color: #215c56;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .details-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+@end
+
+@slot('main')
+
+<div class="create-container" style="max-width: 1000px;"> 
+  
+  <!-- Cabeçalho com Botão Voltar -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+    <h1 style="margin: 0; font-size: 26px; color: #333;">Venda #{{ sale.id }}</h1>
+    
+    @component('components/link-button', { href: route('sales.index'), class: 'button-back' })
+      Voltar para Lista
+    @end
+  </div>
+
+  <!-- Grid com Info da Venda e do Cliente -->
+  <div class="details-grid">
+    
+    <!-- Cartão: Dados da Compra -->
+    <div class="info-box">
+      <h3>Dados da Compra</h3>
+      
+      <div class="info-row">
+        <span class="info-label">Data:</span>
+        <span class="info-value">{{ new Date(sale.createdAt).toLocaleString('pt-BR') }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Status:</span>
+        <span class="info-value" style="color: #1e8e3e; font-weight: bold;">Concluído</span>
+      </div>
+
+      <div class="info-row" style="margin-top: 20px; align-items: center;">
+        <span class="info-label">Valor Total:</span>
+        <span class="info-value total-highlight">R$ {{ sale.amount.toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <!-- Cartão: Dados do Cliente -->
+    <div class="info-box">
+      <h3>Dados do Cliente</h3>
+      
+      <div class="info-row">
+        <span class="info-label">Nome:</span>
+        <span class="info-value">{{ sale.user.fullName }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">Email:</span>
+        <span class="info-value">{{ sale.user.email }}</span>
+      </div>
+
+      <div class="info-row">
+        <span class="info-label">ID Usuário:</span>
+        <span class="info-value">#{{ sale.user.id }}</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Tabela de Itens Comprados -->
+  <h2 style="font-size: 20px; margin-bottom: 15px; color: #215c56;">Itens do Pedido</h2>
+  
+  <table class="styled-table" style="box-shadow: none; border: 1px solid #eee;">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Detalhes</th>
+        <th style="text-align: center;">Qtd</th>
+        <th>Preço Unit.</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <strong>{{ sale.product ? sale.product.name : sale.productName }}</strong>
+          @if(sale.productId && sale.product)
+            <br>
+            <a href="{{ route('products.show', { id: sale.productId }) }}" target="_blank" style="font-size: 12px; color: #215c56; text-decoration: none;">
+              Ver produto na loja <i class="fi fi-rr-arrow-up-right-from-square"></i>
+            </a>
+          @else
+            <br><small style="color: #999;">(Produto removido ou indisponível)</small>
+          @endif
+        </td>
+        <td>
+          Lado: {{ sale.product ? sale.product.side : (sale.productSide || '-') }}<br>
+          <small>{{ sale.product ? sale.product.carManufacturer : '' }}</small>
+        </td>
+        <td style="text-align: center;">{{ sale.quantity }}</td>
+        
+    
+        <td>R$ {{ (sale.amount / sale.quantity).toFixed(2) }}</td>
+        
+        <td style="font-weight: bold; color: #215c56;">R$ {{ sale.amount.toFixed(2) }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+@end
+@end

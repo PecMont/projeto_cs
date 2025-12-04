@@ -22,7 +22,7 @@ import PasswordResetsController from '#controllers/password_resets_controller'
 import SearchController from '#controllers/search_controller'
 import CheckoutController from '#controllers/checkout_controller'
 import OrdersController from '#controllers/orders_controller'
-
+import SalesController from '#controllers/sales_controller'
 
 
 
@@ -120,3 +120,7 @@ router.post('/checkout/cart', [CheckoutController, 'checkoutCart']).as('checkout
 
 // Rota para a IA Descrição
 router.post('/api/enhance-description', [ProductsController, 'enhanceDescription'])
+
+// Vendas
+router.get('/sales', [SalesController, 'index']).as('sales.index').use([middleware.auth(), middleware.admin()])
+router.get('/sales/:id', [SalesController, 'show']).as('sales.show').use([middleware.auth(), middleware.admin()])

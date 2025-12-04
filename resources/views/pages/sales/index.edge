@@ -1,0 +1,49 @@
+@layout.app({ title: 'Relatório de Vendas' })
+
+@slot('main')
+
+<div class="container">
+  <h1>Relatório de Vendas</h1>
+  
+  <!-- Tabela de Vendas -->
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th style="text-align: center; width: 80px;">ID</th>
+        <th>Data da Venda</th>
+        <th>Email do Comprador</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(sale in sales)
+        <tr>
+          <!-- ID Centralizado -->
+          <td style="text-align: center; font-weight: bold;">#{{ sale.id }}</td>
+          
+          <!-- Data formatada para o padrão BR -->
+          <td>{{ new Date(sale.createdAt).toLocaleString('pt-BR') }}</td>
+          
+          <!-- Email do Usuário (Vem do preload('user') no controller) -->
+          <td>{{ sale.user.email }}</td>
+
+          <td class="actions">
+            {{-- Botão Visualizar Detalhes --}}
+            <a href="{{ route('sales.show', { id: sale.id }) }}" class="btn-view btn-icon" title="Ver detalhes da venda">
+              <i class="fi fi-rr-eye"></i>
+            </a>
+          </td>
+        </tr>
+      @else
+        <tr>
+          <td colspan="4" style="text-align: center; padding: 20px; color: #666;">
+            Nenhuma venda registrada até o momento.
+          </td>
+        </tr>
+      @end
+    </tbody>
+  </table>
+</div>
+
+@end
+@end
